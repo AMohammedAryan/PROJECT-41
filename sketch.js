@@ -9,12 +9,15 @@ var maxDrops = 100;
 
 var umbrella, umbrellaImage;
 
-var TBAnimation;
+var TBImage1, TBImage2, TBImage3, TBImage4;
 
 function preload(){
     
    umbrellaImage = loadImage("images/Walking Frame/walking_1.png");
-   TBAnimation = loadAnimation("images/thunderbolt/1.png", "images/thunderbolt/2.png", "images/thunderbolt/3.png", "images/thunderbolt/4.png",)
+   TBImage1 = loadImage("images/thunderbolt/1.png");
+   TBImage2 = loadImage("images/thunderbolt/2.png");
+   TBImage3 = loadImage("images/thunderbolt/3.png");
+   TBImage4 = loadImage("images/thunderbolt/4.png")
 }
 
 function setup(){
@@ -50,10 +53,19 @@ function draw(){
 
       switch(randomWeather){
 
-         case 1: break;
-         case 2: break;
-         case 3: animation(TBAnimation);
-         case 4: break;
+         case 1: image(TBImage1, width/2, height/2);
+         break;
+
+         case 2: image(TBImage2, width/2, height/2)
+         break;
+
+         case 3: image(TBImage3, width/2, height/2)
+         break;
+
+         case 4: image(TBImage4, width/2, height/2)
+         break;
+
+         default: break;
       }
 
       console.log(randomWeather);
