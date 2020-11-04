@@ -1,73 +1,65 @@
-const Engine = Matter.Engine;
-const World = Matter.World;
-const Body = Matter.Body;
-const Bodies = Matter.Bodies;
+var hr = hour();
+var min = minute();
+var sc = second();
 
-var drops = [];
+angleMode(DEGREES);
 
-var maxDrops = 100;
+function setup() {
+  createCanvas(800,400);
+  //createSprite(400, 200, 50, 50);
 
-var umbrella, umbrellaImage;
-
-var TBImage1, TBImage2, TBImage3, TBImage4;
-
-function preload(){
-    
-   umbrellaImage = loadImage("images/Walking Frame/walking_1.png");
-   TBImage1 = loadImage("images/thunderbolt/1.png");
-   TBImage2 = loadImage("images/thunderbolt/2.png");
-   TBImage3 = loadImage("images/thunderbolt/3.png");
-   TBImage4 = loadImage("images/thunderbolt/4.png")
+  scAngle = map(sc, 0, 60, 0, 360);
+  minAngle = map(min, 0, 60, 0, 360);
+  hrAngle = map(hr%12, 0, 24, 0, 360);
 }
 
-function setup(){
-   createCanvas(400, 400); 
-    
-   engine = Engine.create();
-   world = engine.world;
+function draw() {
+  background(255,255,255);  
 
-   for(var i = 0; i < maxDrops;i+=1){
+  translate(width/2, height/2);
 
-      drops.push(new Drops(random(0, 400), random(0, 400)));
-   }
+  push();
 
-   umbrella = new Umbrella(width/2, height - 127);
+  rotate(scAngle);
+  stroke("red");
+  strokeWeight(7);
+  line(0, 0, 300, 0);
+
+  pop();
+
+  push();
+
+  rotate(minAngle);
+  stroke("green");
+  strokeWeight(7);
+  line(0, 0, 200, 0);
+
+  pop();
+
+  push();
+
+  rotate(hrAngle);
+  stroke("blue");
+  strokeWeight(7);
+  line(0, 0, 100, 0);
+
+  pop();
+
+  fill("red");
+
+  arc(0, 0, 300, 300, 0, scAngle);
+
+  fill("green");
+
+  arc(0, 0, 200, 200, 0, minAngle);
+
+  fill("blue");
+
+  arc(0, 0, 100, 100, 0, hrAngle);
+
+  drawSprites();
 }
 
-function draw(){
-   background("black");
-
-   Engine.update(engine);
-   
-   for (var k = 0; k < drops.length; k ++){
-
-      drops[k].display();
-      drops[k].update();
-   }
-
-   umbrella.display();
-
-   if(frameCount % 12 === 0){
-
-      var randomWeather = Math.round(random(1, 4));
-
-      switch(randomWeather){
-
-         case 1: image(TBImage1, width/2, height/2);
-         break;
-
-         case 2: image(TBImage2, width/2, height/2)
-         break;
-
-         case 3: image(TBImage3, width/2, height/2)
-         break;
-
-         case 4: image(TBImage4, width/2, height/2)
-         break;
-
-         default: break;
-      }
-
-      console.log(randomWeather);
-   }
-}   
+console.log(hrAngle);
+console.log(minAngle);
+console.log(hrAngle);
